@@ -28,6 +28,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.MockedStatic
@@ -64,6 +65,8 @@ class CentralConfigurationServiceImplTest {
             .`when`<PackageManager.PackageInfoFlags> { PackageManager.PackageInfoFlags.of(anyLong()) }
             .thenReturn(mock(PackageManager.PackageInfoFlags::class.java))
         `when`(packageManager.getPackageInfo(anyString(), any<PackageManager.PackageInfoFlags>()))
+            .thenReturn(packageInfo)
+        `when`(packageManager.getPackageInfo(anyString(), anyInt()))
             .thenReturn(packageInfo)
 
         Dispatchers.setMain(testDispatcher)

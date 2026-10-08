@@ -7,6 +7,7 @@ package ee.ria.DigiDoc.configuration.loader
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import com.google.gson.Gson
 import ee.ria.DigiDoc.configuration.ConfigurationProperty
 import ee.ria.DigiDoc.configuration.ConfigurationSignatureVerifier
@@ -241,13 +242,18 @@ class ConfigurationLoaderImpl
             }
         }
 
+        @Suppress("DEPRECATION")
         private fun appVersion(context: Context): String =
             try {
                 val packageInfo =
-                    context.packageManager.getPackageInfo(
-                        context.packageName,
-                        PackageManager.PackageInfoFlags.of(0),
-                    )
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        context.packageManager.getPackageInfo(
+                            context.packageName,
+                            PackageManager.PackageInfoFlags.of(0),
+                        )
+                    } else {
+                        context.packageManager.getPackageInfo(context.packageName, 0)
+                    }
                 "${packageInfo.versionName}.${packageInfo.longVersionCode}"
             } catch (e: Exception) {
                 errorLog(logTag, "Unable to read the application version", e)

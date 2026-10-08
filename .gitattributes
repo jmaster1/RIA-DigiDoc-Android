@@ -1,0 +1,3 @@
+# These fixtures are signed over their exact bytes; keep stable LF endings on Windows.
+/config-lib/src/test/resources/config.json text eol=lf
+/config-lib/src/test/resources/config.ecpub text eol=lf

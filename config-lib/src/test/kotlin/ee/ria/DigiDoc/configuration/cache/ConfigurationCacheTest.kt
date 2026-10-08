@@ -15,6 +15,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
+import org.junit.Assume.assumeFalse
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -72,6 +73,11 @@ class ConfigurationCacheTest {
 
     @Test
     fun configurationCache_cacheConfigurationFiles_keepsThePreviousSetWhenTheWriteFails() {
+        assumeFalse(
+            "Windows does not enforce the directory read-only attribute as a write permission",
+            System.getProperty("os.name").startsWith("Windows", ignoreCase = true),
+        )
+
         ConfigurationCache.cacheConfigurationFiles(context, "{\"old\":1}", byteArrayOf(9))
 
         assertTrue(configDir.setWritable(false))

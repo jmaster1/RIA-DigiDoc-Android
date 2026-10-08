@@ -21,6 +21,9 @@ App requirements, container format overview, documentation links and how to use 
 Installation instructions are available in Wiki: 
 [Building source code with Android Studio](https://github.com/open-eid/RIA-DigiDoc-Android/wiki/Building-source-code-with-Android-Studio)
 
+## Android 12 / API 31 compatibility backport
+This personal fork contains an unofficial compatibility branch for Android 12 devices. See [API31_BACKPORT.md](API31_BACKPORT.md) for the changes, prerequisites, and PowerShell build/signing commands.
+
 ## Support
 Official builds are provided through official distribution point [https://www.id.ee/en/article/install-id-software/](https://www.id.ee/en/article/install-id-software/). If you want support, you need to be using official builds. Contact our support via [www.id.ee](http://www.id.ee) for assistance.
 

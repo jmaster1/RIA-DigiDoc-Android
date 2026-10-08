@@ -151,7 +151,14 @@ object UserAgentUtil {
         }
 
     @Throws(PackageManager.NameNotFoundException::class)
+    @Suppress("DEPRECATION")
     private fun getPackageInfo(context: Context): PackageInfo =
-        context.packageManager
-            .getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context.packageManager.getPackageInfo(
+                context.packageName,
+                PackageManager.PackageInfoFlags.of(0),
+            )
+        } else {
+            context.packageManager.getPackageInfo(context.packageName, 0)
+        }
 }

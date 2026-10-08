@@ -3,7 +3,8 @@
 
 [versions]
 compileSdkVersion = "37"
-minSdkVersion = "34"
+# Android 12 (API 31) support for the local compatibility backport.
+minSdkVersion = "31"
 targetSdkVersion = "37"
 versionCode = "1" # Updated via CodeMagic pipeline.
 versionName = "3.2.0"

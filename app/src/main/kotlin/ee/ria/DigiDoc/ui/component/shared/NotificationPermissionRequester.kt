@@ -7,6 +7,7 @@ package ee.ria.DigiDoc.ui.component.shared
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
@@ -31,7 +32,9 @@ fun notificationPermissionRequester(): suspend () -> Boolean {
 
     return remember {
         suspend {
-            if (ContextCompat.checkSelfPermission(
+            // POST_NOTIFICATIONS was added in Android 13; Android 12 does not need this prompt.
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+                ContextCompat.checkSelfPermission(
                     context,
                     Manifest.permission.POST_NOTIFICATIONS,
                 ) == PackageManager.PERMISSION_GRANTED

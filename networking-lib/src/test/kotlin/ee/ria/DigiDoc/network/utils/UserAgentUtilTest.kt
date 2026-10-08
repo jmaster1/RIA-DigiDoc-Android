@@ -21,6 +21,7 @@ import junit.framework.TestCase.assertTrue
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.MockedStatic
@@ -141,6 +142,8 @@ class UserAgentUtilTest {
         `when`(context.packageManager).thenReturn(packageManager)
         `when`(context.packageName).thenReturn("App")
         `when`(packageManager.getPackageInfo(anyString(), any<PackageManager.PackageInfoFlags>()))
+            .thenThrow(PackageManager.NameNotFoundException())
+        `when`(packageManager.getPackageInfo(anyString(), anyInt()))
             .thenThrow(PackageManager.NameNotFoundException())
         mockUsbManagerHandling()
 
@@ -308,6 +311,8 @@ class UserAgentUtilTest {
         `when`(context.packageManager).thenReturn(packageManager)
         `when`(context.packageName).thenReturn("App")
         `when`(packageManager.getPackageInfo(anyString(), any<PackageManager.PackageInfoFlags>()))
+            .thenReturn(packageInfo)
+        `when`(packageManager.getPackageInfo(anyString(), anyInt()))
             .thenReturn(packageInfo)
     }
 

@@ -123,6 +123,8 @@ android {
         }
 
         release {
+            applicationIdSuffix = ".api31"
+            versionNameSuffix = "-api31"
             isMinifyEnabled = true
             isShrinkResources = true
             manifestPlaceholders["usesCleartextTraffic"] = "false"
